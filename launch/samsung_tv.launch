@@ -1,0 +1,16 @@
+<!-- This is a sample lanuch file, please change it based on your needs -->
+
+<launch>
+
+	<node pkg="media_samsung_driver"
+			name="samsung_salon"
+			type="media_samsung_driver"
+			args="com.alfred.ros.samsung.SamsungTvNode"
+			output="screen">
+		<param name="rate" value="1" />
+		<param name="mac" value="e4:7c:f9:77:d8:c5" />
+		<param name="ip" value="192.168.0.40" />
+		<param name="tf_prefix" value="samsung_salon" />
+	</node>
+
+</launch>
