@@ -1,3 +1,11 @@
+/**
+ * This file is part of the Alfred package.
+ *
+ * (c) Mickael Gaillard <mick.gaillard@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 package com.alfred.ros.samsung.internal;
 
 import java.io.IOException;
@@ -9,6 +17,11 @@ import com.alfred.ros.media.IMonitor;
 import com.alfred.ros.samsung.SamsungCommand;
 import com.alfred.ros.samsung.SamsungTvNode;
 
+/**
+*
+* @author Mickael Gaillard <mick.gaillard@gmail.com>
+*
+*/
 public class SamsungMonitor implements IMonitor {
 
     public final static String TV    = "tv";
@@ -35,7 +48,7 @@ public class SamsungMonitor implements IMonitor {
     }
 
     @Override
-    public void callbackCmdAction(MediaAction message, StateData stateData) 
+    public void callbackCmdAction(MediaAction message, StateData stateData)
             throws IOException, InterruptedException {
 
         switch (message.getMethod()) {
@@ -62,7 +75,7 @@ public class SamsungMonitor implements IMonitor {
             case (PROTO_CHANNEL + TV + HDMI2):
             case (PROTO_CHANNEL + TV + HDMI3):
                 // Switch on HDMI
-                if ((PROTO_CHANNEL + HDMI2 + TV).equals(message.getUri())) { 
+                if ((PROTO_CHANNEL + HDMI2 + TV).equals(message.getUri())) {
                     this.node.pushEnum( SamsungCommand.KEY_AUTO_ARC_PIP_WIDE, 2f);
                 } else
 
@@ -72,7 +85,7 @@ public class SamsungMonitor implements IMonitor {
 
                 // Activate PIP
                 this.node.pushEnum( SamsungCommand.KEY_PIP_ONOFF, 2f);
-    
+
                 if (true) {
                     // Menu for Sound channel
                     this.node.pushEnum( SamsungCommand.KEY_TOOLS, 1f );
@@ -117,7 +130,7 @@ public class SamsungMonitor implements IMonitor {
                     }
                     this.node.pushEnum(
                             SamsungCommand.fromName(
-                                    SamsungCommand.KEY  + digit), 
+                                    SamsungCommand.KEY  + digit),
                                     timeout );
                     this.node.pushEnum( SamsungCommand.KEY_ENTER );
                 }
@@ -134,7 +147,7 @@ public class SamsungMonitor implements IMonitor {
             this.node.pushEnum( SamsungCommand.KEY_TOOLS );
             break;
 
-            
+
         default:
             // Send internal command
             if (message.getMethod().contains(SamsungCommand.KEY )) {
@@ -144,10 +157,10 @@ public class SamsungMonitor implements IMonitor {
                     this.node.pushEnum(cmd);
                 } else {
                     this.node.logE(
-                            String.format("Key \"%s\" command not found", 
+                            String.format("Key \"%s\" command not found",
                                     message.getMethod()));
                 }
-            } else 
+            } else
 
             // Else bypass the command
             {

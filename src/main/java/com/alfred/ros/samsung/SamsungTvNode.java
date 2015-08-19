@@ -1,3 +1,11 @@
+/**
+ * This file is part of the Alfred package.
+ *
+ * (c) Mickael Gaillard <mick.gaillard@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 package com.alfred.ros.samsung;
 
 import java.io.IOException;
@@ -18,8 +26,11 @@ import com.alfred.ros.samsung.internal.SamsungSystem;
 
 /**
  * SamsungTv ROS Node.
+ *
+ * @author Mickael Gaillard <mick.gaillard@gmail.com>
+ *
  */
-public class SamsungTvNode 
+public class SamsungTvNode
         extends BaseMediaNodeMain
         implements ReconfigureListener<SamsungConfig> {
 
@@ -43,7 +54,7 @@ public class SamsungTvNode
     }
 
     protected void loadParameters() {
-        this.prefix = String.format("/%s/", 
+        this.prefix = String.format("/%s/",
                 this.connectedNode.getParameterTree()
                     .getString("~tf_prefix", "samsung_salon"));
         this.fixedFrame = this.connectedNode.getParameterTree()
@@ -62,34 +73,34 @@ public class SamsungTvNode
                 .getString("~password", "admin");
 
         this.logI(
-                String.format("rate : %s\nprefix : %s\nfixedFrame : %s\nip : %s\nmac : %s\nport : %s\nuser : %s\npassword : %s", 
-                        this.rate, 
-                        this.prefix, 
-                        this.fixedFrame, 
-                        this.host, 
-                        this.mac, 
-                        this.port, 
-                        this.user, 
+                String.format("rate : %s\nprefix : %s\nfixedFrame : %s\nip : %s\nmac : %s\nport : %s\nuser : %s\npassword : %s",
+                        this.rate,
+                        this.prefix,
+                        this.fixedFrame,
+                        this.host,
+                        this.mac,
+                        this.port,
+                        this.user,
                         this.password));
 
         this.serverReconfig = new Server<SamsungConfig>(
                 connectedNode,
-                new SamsungConfig(this.connectedNode), 
+                new SamsungConfig(this.connectedNode),
                 this);
     }
 
     @Override
     protected void connect() {
         this.logI(String.format("Connecting to %s:%s...", this.host, this.port));
-        
+
         try {
             this.tvIp = SamsungRemoteSession.create(
                     this,
-                    SamsungRemoteSession.APP, 
-                    SamsungRemoteSession.REMOTE, 
-                    this.getHost(), 
+                    SamsungRemoteSession.APP,
+                    SamsungRemoteSession.REMOTE,
+                    this.getHost(),
                     this.getPort() );
-            
+
             this.stateData.setState(StateData.INIT);
             this.isConnected = true;
             this.logI("\tConnected done.");
@@ -125,11 +136,11 @@ public class SamsungTvNode
         this.logD("Send to Samsung : " + key.getValue() );
         this.tvIp.sendKey( key );
         Thread.sleep((long) (1000l*timeout));
-        
+
     }
 
     public void pushEnum (final SamsungCommand key)
-            throws IOException, InterruptedException {      
+            throws IOException, InterruptedException {
         this.pushEnum( key, 0.250f );
     }
 

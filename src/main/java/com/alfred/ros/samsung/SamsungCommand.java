@@ -1,3 +1,11 @@
+/**
+ * This file is part of the Alfred package.
+ *
+ * (c) Mickael Gaillard <mick.gaillard@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 package com.alfred.ros.samsung;
 
 import java.lang.reflect.Field;
@@ -5,11 +13,11 @@ import java.lang.reflect.Field;
 /**
  * Samsung SmartTV command.<br/>
  * TODO: Need mapping on driver...
- * 
+ *
  * @author Mickael Gaillard <mick.gaillard@gmail.com>
  */
-public enum SamsungCommand { 
-	
+public enum SamsungCommand {
+
 	KEY_MENU(),
 	KEY_UP(),
 	KEY_DOWN(),
@@ -252,9 +260,9 @@ public enum SamsungCommand {
 	KEY_EXT39(),
 	KEY_EXT40(),
 	KEY_EXT41();
-	
+
 	public final static String KEY = "KEY_";
-	
+
 	private SamsungCommand() {
 		this.value = null;
 	}
@@ -271,18 +279,18 @@ public enum SamsungCommand {
 
 	public String getValue() {
 		String result = this.value;
-		
+
 		if (value == null) {
 			result = this.name();
 		}
-		
+
 		return result;
 	}
-	
+
 	public String toString() {
 		return this.getClass().getName();
 	}
-	
+
 	/**
 	 * Get the type by its enum name if it exists.
 	 * @param name The type enum name
@@ -291,25 +299,25 @@ public enum SamsungCommand {
 	public static SamsungCommand fromName(final String name) {
 		String realName;
 		SamsungCommand ret = null;
-		
+
 		if (name.lastIndexOf('.') > 0) {
 			// Take only what comes after the last dot
 			realName = name.substring(name.lastIndexOf('.') + 1);
 		} else {
 			realName = name;
 		}
-		
+
 		try {
 			final Field field =
 					SamsungCommand.class.getField(realName.toUpperCase());
-			
+
 			if (field.isEnumConstant()) {
 				ret = (SamsungCommand) field.get(SamsungCommand.class);
 			}
 		} catch (final NoSuchFieldException e) {
-			
+
 		} catch (final IllegalAccessException e) {
-			
+
 		}
 		return ret;
 	}

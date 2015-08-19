@@ -1,3 +1,11 @@
+/**
+ * This file is part of the Alfred package.
+ *
+ * (c) Mickael Gaillard <mick.gaillard@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 package com.alfred.ros.samsung.internal;
 
 import java.io.IOException;
@@ -9,13 +17,18 @@ import com.alfred.ros.media.ISystem;
 import com.alfred.ros.samsung.SamsungCommand;
 import com.alfred.ros.samsung.SamsungTvNode;
 
+/**
+*
+* @author Mickael Gaillard <mick.gaillard@gmail.com>
+*
+*/
 public class SamsungSystem implements ISystem {
 
     /**
      * SamsungTV node.
      */
     private SamsungTvNode samsungTv;
-    
+
     public SamsungSystem(SamsungTvNode samsungTvNode) {
         this.samsungTv = samsungTvNode;
     }
@@ -27,11 +40,11 @@ public class SamsungSystem implements ISystem {
     }
 
     @Override
-    public void callbackCmdAction(MediaAction message, StateData stateData) 
+    public void callbackCmdAction(MediaAction message, StateData stateData)
             throws IOException, InterruptedException {
         switch (message.getMethod()) {
         case OP_POWER:
-            // Not available on Samsung 
+            // Not available on Samsung
             //TODO but copy to wol
             break;
         case OP_SHUTDOWN:

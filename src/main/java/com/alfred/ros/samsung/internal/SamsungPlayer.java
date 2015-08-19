@@ -1,3 +1,11 @@
+/**
+ * This file is part of the Alfred package.
+ *
+ * (c) Mickael Gaillard <mick.gaillard@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 package com.alfred.ros.samsung.internal;
 
 import java.io.IOException;
@@ -10,19 +18,24 @@ import com.alfred.ros.media.IPlayer;
 import com.alfred.ros.samsung.SamsungCommand;
 import com.alfred.ros.samsung.SamsungTvNode;
 
+/**
+*
+* @author Mickael Gaillard <mick.gaillard@gmail.com>
+*
+*/
 public class SamsungPlayer implements IPlayer {
 
-    
+
     private SamsungTvNode node;
-    
+
     public SamsungPlayer(SamsungTvNode node) {
         this.node = node;
     }
-    
+
     @Override
     public void load(PlayerInfo stateData) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
