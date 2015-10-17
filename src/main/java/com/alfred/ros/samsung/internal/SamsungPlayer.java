@@ -33,6 +33,10 @@ public class SamsungPlayer implements IPlayer {
     }
 
     @Override
+    public void load(StateData stateData) {
+        this.load(stateData.getPlayer());
+    }
+
     public void load(PlayerInfo stateData) {
         // TODO Auto-generated method stub
 

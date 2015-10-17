@@ -24,6 +24,10 @@ import com.alfred.ros.media.ISpeaker;
 public class SamsungSpeaker implements ISpeaker {
 
     @Override
+    public void load(StateData stateData) {
+        this.load(stateData.getSpeaker());
+    }
+
     public void load(SpeakerInfo stateData) {
         // TODO Auto-generated method stub
 

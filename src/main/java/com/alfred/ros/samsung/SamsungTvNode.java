@@ -10,14 +10,15 @@ package com.alfred.ros.samsung;
 
 import java.io.IOException;
 
+import media_msgs.MediaAction;
 import media_msgs.StateData;
 
-import org.ros.dynamic_reconfigure.server.Server;
-import org.ros.dynamic_reconfigure.server.Server.ReconfigureListener;
 import org.ros.node.ConnectedNode;
 import org.ros.node.Node;
 
-import com.alfred.ros.media.BaseMediaNodeMain;
+import com.alfred.ros.core.BaseNodeMain;
+import com.alfred.ros.media.MediaMessageConverter;
+import com.alfred.ros.media.MediaStateDataComparator;
 import com.alfred.ros.samsung.driver.LcdTvC650;
 import com.alfred.ros.samsung.driver.SamsungRemoteSession;
 import com.alfred.ros.samsung.internal.SamsungMonitor;
@@ -30,14 +31,16 @@ import com.alfred.ros.samsung.internal.SamsungSystem;
  * @author Mickael Gaillard <mick.gaillard@gmail.com>
  *
  */
-public class SamsungTvNode
-        extends BaseMediaNodeMain
-        implements ReconfigureListener<SamsungConfig> {
+public class SamsungTvNode extends BaseNodeMain<SamsungConfig, StateData, MediaAction> {
 
     protected SamsungRemoteSession tvIp;
 
-    static {
-        nodeName = "samsungtv";
+    public SamsungTvNode() {
+        super("samsungtv",
+                new MediaStateDataComparator(),
+                new MediaMessageConverter(),
+                MediaAction._TYPE,
+                StateData._TYPE);
     }
 
     @Override
@@ -53,82 +56,65 @@ public class SamsungTvNode
         super.onShutdown(node);
     }
 
-    protected void loadParameters() {
-        this.prefix = String.format("/%s/",
-                this.connectedNode.getParameterTree()
-                    .getString("~tf_prefix", "samsung_salon"));
-        this.fixedFrame = this.connectedNode.getParameterTree()
-                .getString("~fixed_frame", "fixed_frame");
-        this.rate = this.connectedNode.getParameterTree()
-                .getInteger("~" + SamsungConfig.RATE, 1);
-        this.mac = this.connectedNode.getParameterTree()
-                .getString("~mac", "00:00:00:00:00:00");
-        this.host = this.connectedNode.getParameterTree()
-                .getString("~ip", "192.168.0.40");
-        this.port = this.connectedNode.getParameterTree()
-                .getInteger("~port", 55000);
-        this.user = this.connectedNode.getParameterTree()
-                .getString("~user", "admin");
-        this.password = this.connectedNode.getParameterTree()
-                .getString("~password", "admin");
-
-        this.logI(
-                String.format("rate : %s\nprefix : %s\nfixedFrame : %s\nip : %s\nmac : %s\nport : %s\nuser : %s\npassword : %s",
-                        this.rate,
-                        this.prefix,
-                        this.fixedFrame,
-                        this.host,
-                        this.mac,
-                        this.port,
-                        this.user,
-                        this.password));
-
-        this.serverReconfig = new Server<SamsungConfig>(
-                connectedNode,
-                new SamsungConfig(this.connectedNode),
-                this);
+    @Override
+    protected void onConnected() {
+        this.getStateData().setState(StateData.ENABLE);
     }
 
     @Override
-    protected void connect() {
-        this.logI(String.format("Connecting to %s:%s...", this.host, this.port));
+    protected void onDisconnected() {
+        this.getStateData().setState(StateData.UNKNOWN);
+    }
+
+    @Override
+    public void onNewMessage(MediaAction message) {
+        if (message != null) {
+            this.logI(String.format("Command \"%s\"... for %s",
+                    message.getMethod(),
+                    message.getUri()));
+
+            super.onNewMessage(message);
+        }
+    }
+
+    @Override
+    protected boolean connect() {
+        boolean isConnected = false;
+        this.logI(String.format("Connecting to %s:%s...", this.configuration.getHost(), this.configuration.getPort()));
 
         try {
             this.tvIp = SamsungRemoteSession.create(
                     this,
                     SamsungRemoteSession.APP,
                     SamsungRemoteSession.REMOTE,
-                    this.getHost(),
-                    this.getPort() );
+                    this.configuration.getHost(),
+                    this.configuration.getPort() );
 
-            this.stateData.setState(StateData.INIT);
-            this.isConnected = true;
+            this.getStateData().setState(StateData.INIT);
+            isConnected = true;
             this.logI("\tConnected done.");
         } catch (Exception e) {
-            this.stateData.setState(StateData.SHUTDOWN);
+            this.getStateData().setState(StateData.SHUTDOWN);
             try {
-                Thread.sleep(10000 / this.rate);
+                Thread.sleep(10000 / this.configuration.getRate());
             } catch (InterruptedException ex) {
                 this.logE(ex);
             }
         }
+
+        return isConnected;
     }
 
     @Override
     protected void initialize() {
         super.initialize();
 
-        this.monitor = new SamsungMonitor(this);
-        this.player = new SamsungPlayer(this);
-//        this.speaker = new SamsungSpeaker(this.xbmcJson, this);
-        this.system = new SamsungSystem(this);
-//        this.library = new SamsungLibrary(this.xbmcJson, this);
-    }
+//        this.speaker = new SamsungSpeaker(this);
+//        this.library = new SamsungLibrary(this);
 
-    @Override
-    public SamsungConfig onReconfigure(SamsungConfig config, int level) {
-        this.rate = config.getInteger(SamsungConfig.RATE, this.rate);
-        return config;
+        this.addModule(new SamsungMonitor(this));
+        this.addModule(new SamsungPlayer(this));
+        this.addModule(new SamsungSystem(this));
     }
 
     public void pushEnum (final SamsungCommand key, final float timeout )
@@ -177,5 +163,10 @@ public class SamsungTvNode
             }
         }
         return true;
+    }
+
+    @Override
+    protected SamsungConfig getConfig() {
+        return new SamsungConfig(this.getConnectedNode());
     }
 }

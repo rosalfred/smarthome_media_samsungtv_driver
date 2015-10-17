@@ -13,7 +13,7 @@ import java.io.IOException;
 import media_msgs.MediaAction;
 import media_msgs.StateData;
 
-import com.alfred.ros.media.ISystem;
+import com.alfred.ros.core.ISystem;
 import com.alfred.ros.samsung.SamsungCommand;
 import com.alfred.ros.samsung.SamsungTvNode;
 
@@ -22,7 +22,7 @@ import com.alfred.ros.samsung.SamsungTvNode;
 * @author Mickael Gaillard <mick.gaillard@gmail.com>
 *
 */
-public class SamsungSystem implements ISystem {
+public class SamsungSystem implements ISystem<StateData, MediaAction> {
 
     /**
      * SamsungTV node.
