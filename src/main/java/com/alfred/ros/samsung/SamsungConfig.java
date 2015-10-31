@@ -29,12 +29,12 @@ public class SamsungConfig extends NodeConfig {
 
     public SamsungConfig(ConnectedNode connectedNode) {
         super(connectedNode, "samsung_salon", "fixed_frame", 1);
-
-        this.addField(RATE, "int", 0, "rate processus", 1, 0, 200);
     }
 
     @Override
     protected void loadParameters() {
+        super.loadParameters();
+
         this.mac = this.connectedNode.getParameterTree()
                 .getString("~mac", "00:00:00:00:00:00");
         this.host = this.connectedNode.getParameterTree()
