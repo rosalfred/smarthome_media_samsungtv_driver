@@ -5,7 +5,7 @@
 	<node pkg="media_samsung_driver"
 			name="samsung_salon"
 			type="media_samsung_driver"
-			args="com.alfred.ros.samsung.SamsungTvNode"
+			args="org.rosmultimedia.player.samsung.SamsungTvNode"
 			output="screen">
 		<param name="rate" value="1" />
 		<param name="mac" value="e4:7c:f9:77:d8:c5" />

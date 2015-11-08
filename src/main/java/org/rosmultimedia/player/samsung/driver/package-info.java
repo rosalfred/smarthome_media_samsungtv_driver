@@ -11,4 +11,4 @@
  * Current available drivers :
  * <ul><li>Samsung SmartTV LE32C650</il><li>...</li><li>...</li></ul>
  */
-package com.alfred.ros.samsung.driver;
+package org.rosmultimedia.player.samsung.driver;

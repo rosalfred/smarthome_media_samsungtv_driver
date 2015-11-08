@@ -1,4 +1,4 @@
-package com.alfred.ros.samsung.driver;
+package org.rosmultimedia.player.samsung.driver;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -17,9 +17,8 @@ import java.util.Arrays;
 import java.util.concurrent.TimeoutException;
 
 import org.apache.commons.codec.binary.Base64;
-
-import com.alfred.ros.samsung.SamsungCommand;
-import com.alfred.ros.samsung.SamsungTvNode;
+import org.rosmultimedia.player.samsung.SamsungCommand;
+import org.rosmultimedia.player.samsung.SamsungTvNode;
 
 /**
 * Copied from https://github.com/keremkusmezer/SamyGo-Android-Remote/tree/master/src/de/quist/samy/remocon,

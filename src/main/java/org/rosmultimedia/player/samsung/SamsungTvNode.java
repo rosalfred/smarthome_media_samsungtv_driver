@@ -6,24 +6,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-package com.alfred.ros.samsung;
+package org.rosmultimedia.player.samsung;
 
 import java.io.IOException;
 
-import media_msgs.MediaAction;
-import media_msgs.StateData;
-
 import org.ros.node.ConnectedNode;
 import org.ros.node.Node;
+import org.rosbuilding.common.BaseNodeMain;
+import org.rosbuilding.common.media.MediaMessageConverter;
+import org.rosbuilding.common.media.MediaStateDataComparator;
+import org.rosmultimedia.player.samsung.driver.LcdTvC650;
+import org.rosmultimedia.player.samsung.driver.SamsungRemoteSession;
+import org.rosmultimedia.player.samsung.internal.SamsungMonitor;
+import org.rosmultimedia.player.samsung.internal.SamsungPlayer;
+import org.rosmultimedia.player.samsung.internal.SamsungSystem;
 
-import com.alfred.ros.core.BaseNodeMain;
-import com.alfred.ros.media.MediaMessageConverter;
-import com.alfred.ros.media.MediaStateDataComparator;
-import com.alfred.ros.samsung.driver.LcdTvC650;
-import com.alfred.ros.samsung.driver.SamsungRemoteSession;
-import com.alfred.ros.samsung.internal.SamsungMonitor;
-import com.alfred.ros.samsung.internal.SamsungPlayer;
-import com.alfred.ros.samsung.internal.SamsungSystem;
+import media_msgs.MediaAction;
+import media_msgs.StateData;
 
 /**
  * SamsungTv ROS Node.
