@@ -8,8 +8,8 @@
 			args="org.rosmultimedia.player.samsung.SamsungTvNode"
 			output="screen">
 		<param name="rate" value="1" />
-		<param name="mac" value="e4:7c:f9:77:d8:c5" />
-		<param name="ip" value="192.168.0.40" />
+		<param name="mac" value="{your_samsung_tv_mac}" />
+		<param name="ip" value="{your_samsung_tv_ip}" />
 		<param name="tf_prefix" value="samsung_salon" />
 	</node>
 
