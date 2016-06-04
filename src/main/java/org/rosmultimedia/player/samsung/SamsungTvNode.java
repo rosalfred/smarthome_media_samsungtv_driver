@@ -21,8 +21,8 @@ import org.rosmultimedia.player.samsung.internal.SamsungMonitor;
 import org.rosmultimedia.player.samsung.internal.SamsungPlayer;
 import org.rosmultimedia.player.samsung.internal.SamsungSystem;
 
-import media_msgs.MediaAction;
-import media_msgs.StateData;
+import smarthome_media_msgs.MediaAction;
+import smarthome_media_msgs.StateData;
 
 /**
  * SamsungTv ROS Node.

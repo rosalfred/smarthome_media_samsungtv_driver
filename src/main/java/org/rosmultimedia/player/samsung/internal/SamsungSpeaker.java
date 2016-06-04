@@ -10,11 +10,11 @@ package org.rosmultimedia.player.samsung.internal;
 
 import org.rosbuilding.common.media.ISpeaker;
 
-import media_msgs.MediaAction;
-import media_msgs.SpeakerInfo;
-import media_msgs.StateData;
-import media_msgs.ToggleMuteSpeakerRequest;
-import media_msgs.ToggleMuteSpeakerResponse;
+import smarthome_media_msgs.MediaAction;
+import smarthome_media_msgs.SpeakerInfo;
+import smarthome_media_msgs.StateData;
+import smarthome_media_msgs.ToggleMuteSpeakerRequest;
+import smarthome_media_msgs.ToggleMuteSpeakerResponse;
 
 /**
 *
