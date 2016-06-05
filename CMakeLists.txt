@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8.3)
 
-project(media_samsungtv_ip_driver)
+project(smarthome_media_samsungtv_driver)
 set(PACKAGE_PATH "org/rosmultimedia/player")
 
 find_package(catkin REQUIRED
