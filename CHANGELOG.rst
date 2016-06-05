@@ -2,8 +2,8 @@
 Changelog for package smarthome_media_samsungtv_driver
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.58 (2016-06-05)
+-------------------
 * Update package xml
 * Update package dependencies
   Update messages packages names
