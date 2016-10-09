@@ -9,9 +9,12 @@
 package org.rosmultimedia.player.samsung;
 
 import java.io.IOException;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
+import java.util.logging.SimpleFormatter;
 
-import org.ros.node.ConnectedNode;
-import org.ros.node.Node;
+import org.ros2.rcljava.RCLJava;
+import org.ros2.rcljava.node.Node;
 import org.rosbuilding.common.BaseNodeMain;
 import org.rosbuilding.common.media.MediaMessageConverter;
 import org.rosbuilding.common.media.MediaStateDataComparator;
@@ -21,8 +24,8 @@ import org.rosmultimedia.player.samsung.internal.SamsungMonitor;
 import org.rosmultimedia.player.samsung.internal.SamsungPlayer;
 import org.rosmultimedia.player.samsung.internal.SamsungSystem;
 
-import smarthome_media_msgs.MediaAction;
-import smarthome_media_msgs.StateData;
+import smarthome_media_msgs.msg.MediaAction;
+import smarthome_media_msgs.msg.StateData;
 
 /**
  * SamsungTv ROS Node.
@@ -38,12 +41,12 @@ public class SamsungTvNode extends BaseNodeMain<SamsungConfig, StateData, MediaA
         super("samsungtv",
                 new MediaStateDataComparator(),
                 new MediaMessageConverter(),
-                MediaAction._TYPE,
-                StateData._TYPE);
+                MediaAction.class.getName(),
+                StateData.class.getName());
     }
 
     @Override
-    public void onStart(ConnectedNode connectedNode) {
+    public void onStart(Node connectedNode) {
         super.onStart(connectedNode);
         this.tvIp = new LcdTvC650(this);
         this.startFinal();
@@ -167,5 +170,29 @@ public class SamsungTvNode extends BaseNodeMain<SamsungConfig, StateData, MediaA
     @Override
     protected SamsungConfig getConfig() {
         return new SamsungConfig(this.getConnectedNode());
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+//        logger.setLevel(Level.ALL);
+//        ConsoleHandler handler = new ConsoleHandler();
+//        handler.setFormatter(new SimpleFormatter());
+//        logger.addHandler(handler);
+//        handler.setLevel(Level.ALL);
+
+        // Initialize RCL
+        RCLJava.rclJavaInit();
+
+        // Let's create a Node
+        Node node = RCLJava.createNode("samsungtv");
+
+        SamsungTvNode samsung = new SamsungTvNode();
+        samsung.onStart(node);
+
+        Thread.sleep(5000);
+        RCLJava.spin(node);
+
+        samsung.onShutdown(node);
+        node.dispose();
+        RCLJava.shutdown();
     }
 }

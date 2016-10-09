@@ -14,8 +14,8 @@ import org.rosbuilding.common.ISystem;
 import org.rosmultimedia.player.samsung.SamsungCommand;
 import org.rosmultimedia.player.samsung.SamsungTvNode;
 
-import smarthome_media_msgs.MediaAction;
-import smarthome_media_msgs.StateData;
+import smarthome_media_msgs.msg.MediaAction;
+import smarthome_media_msgs.msg.StateData;
 
 /**
 *

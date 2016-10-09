@@ -10,11 +10,11 @@ package org.rosmultimedia.player.samsung.internal;
 
 import org.rosbuilding.common.media.ISpeaker;
 
-import smarthome_media_msgs.MediaAction;
-import smarthome_media_msgs.SpeakerInfo;
-import smarthome_media_msgs.StateData;
-import smarthome_media_msgs.ToggleMuteSpeakerRequest;
-import smarthome_media_msgs.ToggleMuteSpeakerResponse;
+import smarthome_media_msgs.msg.MediaAction;
+import smarthome_media_msgs.msg.SpeakerInfo;
+import smarthome_media_msgs.msg.StateData;
+import smarthome_media_msgs.srv.ToggleMuteSpeaker_Request;
+import smarthome_media_msgs.srv.ToggleMuteSpeaker_Response;
 
 /**
 *
@@ -40,8 +40,8 @@ public class SamsungSpeaker implements ISpeaker {
     }
 
     @Override
-    public void handleSpeakerMuteToggle(ToggleMuteSpeakerRequest request,
-            ToggleMuteSpeakerResponse response) {
+    public void handleSpeakerMuteToggle(ToggleMuteSpeaker_Request request,
+            ToggleMuteSpeaker_Response response) {
         // TODO Auto-generated method stub
 
     }
