@@ -11,11 +11,12 @@ package org.rosmultimedia.player.samsung;
 import java.io.IOException;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 import org.ros2.rcljava.RCLJava;
 import org.ros2.rcljava.node.Node;
-import org.rosbuilding.common.BaseNodeMain;
+import org.rosbuilding.common.BaseDriverNode;
 import org.rosbuilding.common.media.MediaMessageConverter;
 import org.rosbuilding.common.media.MediaStateDataComparator;
 import org.rosmultimedia.player.samsung.driver.LcdTvC650;
@@ -33,9 +34,10 @@ import smarthome_media_msgs.msg.StateData;
  * @author Mickael Gaillard <mick.gaillard@gmail.com>
  *
  */
-public class SamsungTvNode extends BaseNodeMain<SamsungConfig, StateData, MediaAction> {
+public class SamsungTvNode extends BaseDriverNode<SamsungConfig, StateData, MediaAction> {
 
     protected SamsungRemoteSession tvIp;
+    private static Logger logger = Logger.getLogger(RCLJava.LOG_NAME);
 
     public SamsungTvNode() {
         super("samsungtv",
@@ -68,16 +70,16 @@ public class SamsungTvNode extends BaseNodeMain<SamsungConfig, StateData, MediaA
         this.getStateData().setState(StateData.UNKNOWN);
     }
 
-    @Override
-    public void onNewMessage(MediaAction message) {
-        if (message != null) {
-            this.logI(String.format("Command \"%s\"... for %s",
-                    message.getMethod(),
-                    message.getUri()));
-
-            super.onNewMessage(message);
-        }
-    }
+//    @Override
+//    public void onNewMessage(MediaAction message) {
+//        if (message != null) {
+//            this.logI(String.format("Command \"%s\"... for %s",
+//                    message.getMethod(),
+//                    message.getUri()));
+//
+//            super.onNewMessage(message);
+//        }
+//    }
 
     @Override
     protected boolean connect() {
@@ -173,11 +175,11 @@ public class SamsungTvNode extends BaseNodeMain<SamsungConfig, StateData, MediaA
     }
 
     public static void main(String[] args) throws InterruptedException {
-//        logger.setLevel(Level.ALL);
-//        ConsoleHandler handler = new ConsoleHandler();
-//        handler.setFormatter(new SimpleFormatter());
-//        logger.addHandler(handler);
-//        handler.setLevel(Level.ALL);
+        logger.setLevel(Level.ALL);
+        ConsoleHandler handler = new ConsoleHandler();
+        handler.setFormatter(new SimpleFormatter());
+        logger.addHandler(handler);
+        handler.setLevel(Level.ALL);
 
         // Initialize RCL
         RCLJava.rclJavaInit();
@@ -188,7 +190,6 @@ public class SamsungTvNode extends BaseNodeMain<SamsungConfig, StateData, MediaA
         SamsungTvNode samsung = new SamsungTvNode();
         samsung.onStart(node);
 
-        Thread.sleep(5000);
         RCLJava.spin(node);
 
         samsung.onShutdown(node);
