@@ -9,16 +9,14 @@
 package org.rosmultimedia.player.samsung;
 
 import java.io.IOException;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 import org.ros2.rcljava.RCLJava;
 import org.ros2.rcljava.node.Node;
+
 import org.rosbuilding.common.BaseDriverNode;
 import org.rosbuilding.common.media.MediaMessageConverter;
 import org.rosbuilding.common.media.MediaStateDataComparator;
+
 import org.rosmultimedia.player.samsung.driver.LcdTvC650;
 import org.rosmultimedia.player.samsung.driver.SamsungRemoteSession;
 import org.rosmultimedia.player.samsung.internal.SamsungMonitor;
@@ -37,7 +35,6 @@ import smarthome_media_msgs.msg.StateData;
 public class SamsungTvNode extends BaseDriverNode<SamsungConfig, StateData, MediaAction> {
 
     protected SamsungRemoteSession tvIp;
-    private static Logger logger = Logger.getLogger(RCLJava.LOG_NAME);
 
     public SamsungTvNode() {
         super("samsungtv",
@@ -92,7 +89,7 @@ public class SamsungTvNode extends BaseDriverNode<SamsungConfig, StateData, Medi
                     SamsungRemoteSession.APP,
                     SamsungRemoteSession.REMOTE,
                     this.configuration.getHost(),
-                    this.configuration.getPort() );
+                    (int)this.configuration.getPort() );
 
             this.getStateData().setState(StateData.INIT);
             isConnected = true;
@@ -175,12 +172,6 @@ public class SamsungTvNode extends BaseDriverNode<SamsungConfig, StateData, Medi
     }
 
     public static void main(String[] args) throws InterruptedException {
-        logger.setLevel(Level.ALL);
-        ConsoleHandler handler = new ConsoleHandler();
-        handler.setFormatter(new SimpleFormatter());
-        logger.addHandler(handler);
-        handler.setLevel(Level.ALL);
-
         // Initialize RCL
         RCLJava.rclJavaInit();
 

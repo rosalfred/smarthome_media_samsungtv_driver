@@ -9,66 +9,25 @@
 package org.rosmultimedia.player.samsung;
 
 import org.ros2.rcljava.node.Node;
-import org.rosbuilding.common.NodeConfig;
+import org.rosbuilding.common.NodeDriverConnectedConfig;
 
 /**
 *
 * @author Mickael Gaillard <mick.gaillard@gmail.com>
 *
 */
-public class SamsungConfig extends NodeConfig {
+public class SamsungConfig extends NodeDriverConnectedConfig {
 
-    public static final String RATE = "rate";
-
-    private String mac;
-    private String host;
-    private int    port;
-    private String user;
-    private String password;
-
-    public SamsungConfig(Node connectedNode) {
-        super(connectedNode, "/home/salon/samsungtv/", "fixed_frame", 1);
-    }
-
-    @Override
-    protected void loadParameters() {
-        super.loadParameters();
-
-//        this.mac = this.connectedNode.getParameterTree()
-//                .getString("~mac", "00:00:00:00:00:00");
-//        this.host = this.connectedNode.getParameterTree()
-//                .getString("~ip", "192.168.0.40");
-//        this.port = this.connectedNode.getParameterTree()
-//                .getInteger("~port", 55000);
-//        this.user = this.connectedNode.getParameterTree()
-//                .getString("~user", "admin");
-//        this.password = this.connectedNode.getParameterTree()
-//                .getString("~password", "admin");
-
-        this.mac = "00:00:00:00:00:00";
-        this.host = "192.168.0.40";
-        this.port = 55000;
-        this.user = "admin";
-        this.password = "admin";
-    }
-
-    public String getMac() {
-        return this.mac;
-    }
-
-    public String getHost() {
-        return this.host;
-    }
-
-    public int getPort() {
-        return this.port;
-    }
-
-    public String getUser() {
-        return this.user;
-    }
-
-    public String getPassword() {
-        return this.password;
+    public SamsungConfig(final Node connectedNode) {
+        super(
+                connectedNode,
+                "/home/salon/samsungtv/",
+                "fixed_frame",
+                1,
+                "00:00:00:00:00:00",
+                "192.168.0.40",
+                55000L,
+                "admin",
+                "admin");
     }
 }
