@@ -37,11 +37,11 @@ public class SamsungTvNode extends BaseDriverNode<SamsungConfig, StateData, Medi
     protected SamsungRemoteSession tvIp;
 
     public SamsungTvNode() {
-        super("samsungtv",
-                new MediaStateDataComparator(),
-                new MediaMessageConverter(),
-                MediaAction.class.getName(),
-                StateData.class.getName());
+        super(
+            new MediaStateDataComparator(),
+            new MediaMessageConverter(),
+            MediaAction.class.getName(),
+            StateData.class.getName());
     }
 
     @Override
