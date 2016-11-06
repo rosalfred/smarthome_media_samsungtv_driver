@@ -167,7 +167,7 @@ public class SamsungTvNode extends BaseDriverNode<SamsungConfig, StateData, Medi
     }
 
     @Override
-    protected SamsungConfig getConfig() {
+    protected SamsungConfig makeConfiguration() {
         return new SamsungConfig(this.getConnectedNode());
     }
 
