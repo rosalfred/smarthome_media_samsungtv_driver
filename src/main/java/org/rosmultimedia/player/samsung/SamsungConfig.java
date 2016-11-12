@@ -21,7 +21,8 @@ public class SamsungConfig extends NodeDriverConnectedConfig {
     public SamsungConfig(final Node connectedNode) {
         super(
                 connectedNode,
-                "/home/salon/samsungtv/",
+                "/home/salon",
+                "samsungtv",
                 "fixed_frame",
                 1,
                 "00:00:00:00:00:00",

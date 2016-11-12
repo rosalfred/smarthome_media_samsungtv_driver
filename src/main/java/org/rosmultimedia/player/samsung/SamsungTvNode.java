@@ -176,7 +176,7 @@ public class SamsungTvNode extends BaseDriverNode<SamsungConfig, StateData, Medi
         RCLJava.rclJavaInit();
 
         // Let's create a Node
-        Node node = RCLJava.createNode("samsungtv");
+        Node node = RCLJava.createNode("/home/salon", "samsungtv");
 
         SamsungTvNode samsung = new SamsungTvNode();
         samsung.onStart(node);
