@@ -1,5 +1,5 @@
 plugins {
-    id "org.ros2.rcljava" version "0.4.4"
+    id "org.ros2.rcljava" version "0.4.6"
 }
 
 apply plugin: 'org.ros2.rcljava'
@@ -8,7 +8,6 @@ sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 group = 'org.rosmultimedia.player'
-ament {generateEclipse=true}
 
 repositories {
      jcenter()
@@ -23,4 +22,15 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     runtime fileTree(dir: 'libs', include: '*.jar')
+}
+
+ament {
+    generateEclipse = true
+
+    scripts {
+        main {
+            applicationName = project.name
+            mainClassName = 'org.rosmultimedia.player.samsung.SamsungTvNode'
+        }
+    }
 }
