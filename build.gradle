@@ -14,14 +14,14 @@ repositories {
 }
 
 dependencies {
-    compile 'joda-time:joda-time:2.3'
-    compile 'com.google.guava:guava:12.0'
+    compile 'joda-time:joda-time:2.+'
+    compile 'com.google.guava:guava:19+'
+    compile 'com.google.code.gson:gson:2+'
+
     compile 'commons-codec:commons-codec:1.10'
 
-
-    testCompile 'junit:junit:4.12'
-
     runtime fileTree(dir: 'libs', include: '*.jar')
+    testCompile 'junit:junit:4.12'
 }
 
 ament {
