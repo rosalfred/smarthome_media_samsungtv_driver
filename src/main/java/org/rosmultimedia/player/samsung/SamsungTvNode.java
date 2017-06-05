@@ -48,13 +48,12 @@ public class SamsungTvNode extends BaseDriverNode<SamsungConfig, StateData, Medi
     public void onStart(Node connectedNode) {
         super.onStart(connectedNode);
         this.tvIp = new LcdTvC650(this);
-        this.startFinal();
     }
 
     @Override
-    public void onShutdown(Node node) {
+    public void onShutdown() {
         this.tvIp.destroy();
-        super.onShutdown(node);
+        super.onShutdown();
     }
 
     @Override
@@ -172,19 +171,19 @@ public class SamsungTvNode extends BaseDriverNode<SamsungConfig, StateData, Medi
     }
 
     public static void main(String[] args) throws InterruptedException {
-        // Initialize RCL
         RCLJava.rclJavaInit();
 
-        // Let's create a Node
-        Node node = RCLJava.createNode("/home/salon", "samsungtv");
+        final SamsungTvNode samsung = new SamsungTvNode();
+        final Node node = RCLJava.createNode("samsungtv");
 
-        SamsungTvNode samsung = new SamsungTvNode();
         samsung.onStart(node);
+        samsung.onStarted();
 
         RCLJava.spin(node);
 
-        samsung.onShutdown(node);
-        node.dispose();
+        samsung.onShutdown();
+        samsung.onShutdowned();
+
         RCLJava.shutdown();
     }
 }
