@@ -55,7 +55,7 @@ public class SamsungRemoteSession {
     private transient SamsungTvNode node;
 
     public SamsungRemoteSession(SamsungTvNode samsungTvNode) {
-
+        this.node = samsungTvNode;
     }
 
     private SamsungRemoteSession(
