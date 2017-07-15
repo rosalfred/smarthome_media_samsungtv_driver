@@ -2,7 +2,6 @@ package org.ros2.rcljava.node;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Queue;
@@ -298,13 +297,13 @@ public class MockNode implements Node {
     }
 
     @Override
-    public Collection<Byte> getParametersTypes(List<String> names) {
+    public List<Byte> getParametersTypes(List<String> names) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public Collection<String> getParametersNames() {
+    public List<String> getParametersNames() {
         // TODO Auto-generated method stub
         return null;
     }
