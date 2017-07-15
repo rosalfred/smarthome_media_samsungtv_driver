@@ -9,8 +9,9 @@
 package org.rosmultimedia.player.samsung.internal;
 
 import java.io.IOException;
+import java.util.List;
 
-import org.rosbuilding.common.media.IMonitor;
+import org.rosbuilding.common.media.Monitor;
 import org.rosmultimedia.player.samsung.SamsungCommand;
 import org.rosmultimedia.player.samsung.SamsungTvNode;
 
@@ -22,7 +23,7 @@ import smarthome_media_msgs.msg.StateData;
 * @author Mickael Gaillard <mick.gaillard@gmail.com>
 *
 */
-public class SamsungMonitor implements IMonitor {
+public class SamsungMonitor extends Monitor {
 
     public final static String TV    = "tv";
     public final static String HDMI  = "hdmi";
@@ -169,6 +170,12 @@ public class SamsungMonitor implements IMonitor {
 
             break;
         }
+    }
 
+    @Override
+    protected void initializeAvailableMethods(List<String> availableMethods) {
+        availableMethods.add(OP_CHANNEL);
+        availableMethods.add(GUIDE);
+        availableMethods.add(TOOLS);
     }
 }

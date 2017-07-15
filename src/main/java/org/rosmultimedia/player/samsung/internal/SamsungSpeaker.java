@@ -8,7 +8,9 @@
  */
 package org.rosmultimedia.player.samsung.internal;
 
-import org.rosbuilding.common.media.ISpeaker;
+import java.util.List;
+
+import org.rosbuilding.common.media.Speaker;
 
 import smarthome_media_msgs.msg.MediaAction;
 import smarthome_media_msgs.msg.SpeakerInfo;
@@ -21,11 +23,16 @@ import smarthome_media_msgs.srv.ToggleMuteSpeaker_Response;
 * @author Mickael Gaillard <mick.gaillard@gmail.com>
 *
 */
-public class SamsungSpeaker implements ISpeaker {
+public class SamsungSpeaker extends Speaker {
 
     @Override
     public void load(StateData stateData) {
         this.load(stateData.getSpeaker());
+    }
+
+    @Override
+    protected void initializeAvailableMethods(List<String> arg0) {
+
     }
 
     public void load(SpeakerInfo stateData) {
@@ -45,6 +52,4 @@ public class SamsungSpeaker implements ISpeaker {
         // TODO Auto-generated method stub
 
     }
-
-
 }

@@ -9,12 +9,15 @@
 package org.rosmultimedia.player.samsung.internal;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.rosbuilding.common.ISystem;
+import org.rosbuilding.common.System;
 import org.rosmultimedia.player.samsung.SamsungCommand;
 import org.rosmultimedia.player.samsung.SamsungTvNode;
 
 import smarthome_media_msgs.msg.MediaAction;
+import smarthome_media_msgs.msg.MediaType;
 import smarthome_media_msgs.msg.StateData;
 
 /**
@@ -22,7 +25,7 @@ import smarthome_media_msgs.msg.StateData;
 * @author Mickael Gaillard <mick.gaillard@gmail.com>
 *
 */
-public class SamsungSystem implements ISystem<StateData, MediaAction> {
+public class SamsungSystem extends System<StateData, MediaAction> {
 
     /**
      * SamsungTV node.
@@ -31,6 +34,12 @@ public class SamsungSystem implements ISystem<StateData, MediaAction> {
 
     public SamsungSystem(SamsungTvNode samsungTvNode) {
         this.samsungTv = samsungTvNode;
+    }
+
+    @Override
+    protected void initializeAvailableMethods(List<String> availableMethods) {
+        availableMethods.add(OP_POWER);
+        availableMethods.add(OP_SHUTDOWN);
     }
 
     @Override
@@ -55,5 +64,4 @@ public class SamsungSystem implements ISystem<StateData, MediaAction> {
         }
 
     }
-
 }

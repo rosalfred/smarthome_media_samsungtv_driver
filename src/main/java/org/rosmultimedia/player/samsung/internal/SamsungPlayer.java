@@ -9,8 +9,9 @@
 package org.rosmultimedia.player.samsung.internal;
 
 import java.io.IOException;
+import java.util.List;
 
-import org.rosbuilding.common.media.IPlayer;
+import org.rosbuilding.common.media.Player;
 import org.rosmultimedia.player.samsung.SamsungCommand;
 import org.rosmultimedia.player.samsung.SamsungTvNode;
 
@@ -23,13 +24,25 @@ import smarthome_media_msgs.msg.StateData;
 * @author Mickael Gaillard <mick.gaillard@gmail.com>
 *
 */
-public class SamsungPlayer implements IPlayer {
-
+public class SamsungPlayer extends Player {
 
     private SamsungTvNode node;
 
     public SamsungPlayer(SamsungTvNode node) {
         this.node = node;
+    }
+
+    @Override
+    protected void initializeAvailableMethods(List<String> availableMethods) {
+        availableMethods.add(OP_HOME);
+        availableMethods.add(OP_INFO);
+        availableMethods.add(OP_DISPLAY);
+        availableMethods.add(OP_SELECT);
+        availableMethods.add(OP_CONTEXT);
+        availableMethods.add(OP_UP);
+        availableMethods.add(OP_DOWN);
+        availableMethods.add(OP_LEFT);
+        availableMethods.add(OP_RIGHT);
     }
 
     @Override
@@ -109,5 +122,4 @@ public class SamsungPlayer implements IPlayer {
 
         }
     }
-
 }
