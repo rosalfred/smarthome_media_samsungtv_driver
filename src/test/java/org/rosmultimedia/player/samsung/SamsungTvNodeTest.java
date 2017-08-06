@@ -47,6 +47,7 @@ public class SamsungTvNodeTest {
     }
 
     @Test
+    @Ignore
     public final void testConnect() {
         boolean isconnected = this.managedNode.connect();
         assertTrue(isconnected);
