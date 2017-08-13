@@ -23,7 +23,9 @@ import org.ros2.rcljava.time.WallTimer;
 import org.ros2.rcljava.time.WallTimerCallback;
 
 import builtin_interfaces.msg.Time;
+import rcl_interfaces.msg.ListParametersResult;
 import rcl_interfaces.msg.Parameter;
+import rcl_interfaces.msg.ParameterDescriptor;
 import rcl_interfaces.msg.ParameterEvent;
 import rcl_interfaces.msg.ParameterType;
 import rcl_interfaces.msg.SetParametersResult;
@@ -63,6 +65,36 @@ public class MockNode implements Node {
                 // TODO Auto-generated method stub
 
             }
+
+            @Override
+            public void doInterProcessPublish(T arg0) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public String getGid() {
+                // TODO Auto-generated method stub
+                return null;
+            }
+
+            @Override
+            public String getIntraProcessGid() {
+                // TODO Auto-generated method stub
+                return null;
+            }
+
+            @Override
+            public int getQueueSize() {
+                // TODO Auto-generated method stub
+                return 0;
+            }
+
+            @Override
+            public String getTopicName() {
+                // TODO Auto-generated method stub
+                return null;
+            }
         };
     }
 
@@ -84,6 +116,12 @@ public class MockNode implements Node {
 
             @Override
             public SubscriptionCallback<T> getCallback() {
+                // TODO Auto-generated method stub
+                return null;
+            }
+
+            @Override
+            public String getTopicName() {
                 // TODO Auto-generated method stub
                 return null;
             }
@@ -353,6 +391,79 @@ public class MockNode implements Node {
     public Queue<WallTimer> getWallTimers() {
         // TODO Auto-generated method stub
         return null;
+    }
+
+
+    @Override
+    public <T extends Message> Publisher<T> createPublisher(Class<T> arg0, String arg1, int arg2) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+
+    @Override
+    public <T extends Message> Subscription<T> createSubscription(Class<T> arg0, String arg1,
+            SubscriptionCallback<T> arg2, int arg3) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+
+    @Override
+    public <T extends Message> Subscription<T> createSubscription(Class<T> arg0, String arg1,
+            SubscriptionCallback<T> arg2, QoSProfile arg3, boolean arg4) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+
+    @Override
+    public <T extends Message> Subscription<T> createSubscription(Class<T> arg0, String arg1,
+            SubscriptionCallback<T> arg2, int arg3, boolean arg4) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+
+    @Override
+    public List<ParameterDescriptor> describeParameters(List<String> arg0) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+
+    @Override
+    public boolean getParameter(String arg0, ParameterVariant<?> arg1) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+
+    @Override
+    public boolean getParameterOr(String arg0, ParameterVariant<?> arg1, ParameterVariant<?> arg2) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+
+    @Override
+    public List<Class<?>> getParameterTypes(List<String> arg0) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+
+    @Override
+    public ListParametersResult listParameters(List<String> arg0, int arg1) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+
+    @Override
+    public <T> void setParameterIfNotSet(String arg0, T arg1) {
+        // TODO Auto-generated method stub
+
     }
 
 }

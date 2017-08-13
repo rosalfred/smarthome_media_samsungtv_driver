@@ -3,9 +3,9 @@ package org.ros2.rcljava.node;
 import org.rosmultimedia.player.samsung.SamsungTvNode;
 import org.rosmultimedia.player.samsung.driver.SamsungRemoteSession;
 
-public class MockRemoteSeesion extends SamsungRemoteSession {
+public class MockRemoteSession extends SamsungRemoteSession {
 
-    public MockRemoteSeesion(SamsungTvNode samsungTvNode) {
+    public MockRemoteSession(SamsungTvNode samsungTvNode) {
         super(samsungTvNode);
     }
 

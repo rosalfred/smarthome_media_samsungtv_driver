@@ -10,7 +10,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import org.ros2.rcljava.node.MockNode;
-import org.ros2.rcljava.node.MockRemoteSeesion;
+import org.ros2.rcljava.node.MockRemoteSession;
 import org.ros2.rcljava.node.Node;
 
 public class SamsungTvNodeTest {
@@ -30,8 +30,9 @@ public class SamsungTvNodeTest {
         Node node = new MockNode();
         this.managedNode = new SamsungTvNode();
         this.managedNode.onStart(node);
+        this.managedNode.tvIp = new MockRemoteSession(this.managedNode);
         this.managedNode.onStarted();
-        this.managedNode.tvIp = new MockRemoteSeesion(this.managedNode);
+
     }
 
     @After
@@ -74,14 +75,15 @@ public class SamsungTvNodeTest {
     }
 
     @Test
-    @Ignore
     public final void testOnStartNode() {
+        this.managedNode.onShutdown();
+        this.managedNode.onShutdowned();
+
         Node node = new MockNode();
-        managedNode = new SamsungTvNode();
-        managedNode.onStart(node);
-        managedNode.tvIp = new MockRemoteSeesion(this.managedNode);
-        managedNode.onShutdown();
-        managedNode.onShutdowned();
+        this.managedNode = new SamsungTvNode();
+        this.managedNode.onStart(node);
+        this.managedNode.tvIp = new MockRemoteSession(this.managedNode);
+        this.managedNode.onStarted();
     }
 
     @Test

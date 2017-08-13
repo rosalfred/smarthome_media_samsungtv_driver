@@ -9,7 +9,6 @@
 package org.rosmultimedia.player.samsung.internal;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.rosbuilding.common.System;
@@ -17,7 +16,6 @@ import org.rosmultimedia.player.samsung.SamsungCommand;
 import org.rosmultimedia.player.samsung.SamsungTvNode;
 
 import smarthome_media_msgs.msg.MediaAction;
-import smarthome_media_msgs.msg.MediaType;
 import smarthome_media_msgs.msg.StateData;
 
 /**
