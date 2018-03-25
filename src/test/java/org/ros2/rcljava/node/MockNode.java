@@ -8,7 +8,7 @@ import java.util.Queue;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-import org.ros2.rcljava.Log;
+import org.ros2.rcljava.Logger;
 import org.ros2.rcljava.internal.message.Message;
 import org.ros2.rcljava.internal.service.MessageService;
 import org.ros2.rcljava.node.parameter.ParameterVariant;
@@ -135,8 +135,7 @@ public class MockNode implements Node {
     }
 
     @Override
-    public <T extends MessageService> Client<T> createClient(Class<T> message, String service, QoSProfile qos)
-            throws Exception {
+    public <T extends MessageService> Client<T> createClient(Class<T> message, String service, QoSProfile qos) {
         // TODO Auto-generated method stub
         return new Client<T>() {
 
@@ -167,19 +166,19 @@ public class MockNode implements Node {
     }
 
     @Override
-    public <T extends MessageService> Client<T> createClient(Class<T> message, String service) throws Exception {
+    public <T extends MessageService> Client<T> createClient(Class<T> message, String service) {
         return this.createClient(message, service, null);
     }
 
     @Override
     public <T extends MessageService> org.ros2.rcljava.node.service.Service<T> createService(Class<T> serviceType,
-            String serviceName, ServiceCallback<?, ?> callback, QoSProfile qos) throws Exception {
+            String serviceName, ServiceCallback<?, ?> callback, QoSProfile qos) {
         return null;
     }
 
     @Override
     public <T extends MessageService> org.ros2.rcljava.node.service.Service<T> createService(Class<T> serviceType,
-            String serviceName, ServiceCallback<?, ?> callback) throws Exception {
+            String serviceName, ServiceCallback<?, ?> callback) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -288,12 +287,6 @@ public class MockNode implements Node {
     }
 
     @Override
-    public long getNodeHandle() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
     public void notifyGraphChange() {
         // TODO Auto-generated method stub
 
@@ -371,8 +364,8 @@ public class MockNode implements Node {
     }
 
     @Override
-    public Log getLog() {
-        return new Log(this);
+    public Logger getLogger() {
+        return new Logger(this);
     }
 
     @Override
@@ -471,6 +464,13 @@ public class MockNode implements Node {
     public void close() throws Exception {
         // TODO Auto-generated method stub
 
+    }
+
+
+    @Override
+    public String getLoggerName() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }
