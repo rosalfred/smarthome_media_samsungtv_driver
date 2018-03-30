@@ -1,5 +1,6 @@
 package org.ros2.rcljava.node;
 
+import java.time.Clock;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -95,6 +96,30 @@ public class MockNode implements Node {
                 // TODO Auto-generated method stub
                 return null;
             }
+
+            @Override
+            public void close() throws Exception {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public Class<T> getMessageType() {
+                // TODO Auto-generated method stub
+                return null;
+            }
+
+            @Override
+            public Node getNode() {
+                // TODO Auto-generated method stub
+                return null;
+            }
+
+            @Override
+            public QoSProfile getQosProfile() {
+                // TODO Auto-generated method stub
+                return null;
+            }
         };
     }
 
@@ -122,6 +147,30 @@ public class MockNode implements Node {
 
             @Override
             public String getTopicName() {
+                // TODO Auto-generated method stub
+                return null;
+            }
+
+            @Override
+            public void close() throws Exception {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public Class<T> getMessageType() {
+                // TODO Auto-generated method stub
+                return null;
+            }
+
+            @Override
+            public Node getNode() {
+                // TODO Auto-generated method stub
+                return null;
+            }
+
+            @Override
+            public QoSProfile getQosProfile() {
                 // TODO Auto-generated method stub
                 return null;
             }
@@ -161,6 +210,18 @@ public class MockNode implements Node {
             public <U extends Message> void handleResponse(RMWRequestId rmwRequestId, U responseMessage) {
                 // TODO Auto-generated method stub
 
+            }
+
+            @Override
+            public void close() throws Exception {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public Class<? extends Message> getRequestType() {
+                // TODO Auto-generated method stub
+                return null;
             }
         };
     }
@@ -369,12 +430,6 @@ public class MockNode implements Node {
     }
 
     @Override
-    public Time getCurrentTime() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
     public WallTimer createWallTimer(long arg0, TimeUnit arg1, WallTimerCallback arg2) {
         // TODO Auto-generated method stub
         return null;
@@ -469,6 +524,20 @@ public class MockNode implements Node {
 
     @Override
     public String getLoggerName() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+
+    @Override
+    public Clock getClock() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+
+    @Override
+    public Time now() {
         // TODO Auto-generated method stub
         return null;
     }
